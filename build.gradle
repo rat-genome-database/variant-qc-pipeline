@@ -13,7 +13,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-mainClassName = 'edu.mcw.rgd.variantQc.Main'
+mainClassName = 'edu.mcw.rgd.variantQc.Manager'
 String myAppName = 'variant-qc-pipeline'
 
 project.archivesBaseName = myAppName

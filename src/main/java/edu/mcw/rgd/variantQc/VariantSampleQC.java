@@ -39,7 +39,7 @@ public class VariantSampleQC {
             String lineData;
             String[] cols = {};
             HashMap<Integer, Sample> sampleMap = new HashMap<>();
-            int totalNewSamples = 0;
+            int totalNewSamples = 0, varNotFound = 0;
             List<VariantSampleDetail> tobeUpdated = new ArrayList<>();
             List<VariantSampleDetail> tobeInserted = new ArrayList<>();
             int totalUpdated = 0;

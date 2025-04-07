@@ -85,6 +85,11 @@ public class VariantSampleQC {
                         switch (i){
                             case 0: // chrom
                                 chrom = lineSplit[i];
+                                if (chrom.equals("chrM"))
+                                    chrom = chrom.replace("chrM","MT");
+                                if (chrom.startsWith("chr") || chrom.startsWith("CHR") || chrom.startsWith("Chr")) {
+                                    chrom = chrom.replace("chr","").replace("CHR", "").replace("Chr","");
+                                }
                                 break;
                             case 1: // pos
                                 pos = Integer.parseInt(lineSplit[i]);
@@ -115,13 +120,31 @@ public class VariantSampleQC {
                     for(VariantMapData vmd : vmds){
                         if (alts.length>1) {
                             for (int j = 0; j < alts.length; j++) {
-                                if (Utils.stringsAreEqual(vmd.getReferenceNucleotide(), ref) && Utils.stringsAreEqual(vmd.getVariantNucleotide(), alts[j])) {
+                                String a = alts[j];
+                                String r = ref;
+                                if (r.length()>a.length()){
+                                    r = r.substring(1);
+                                    a = null;
+                                } else if (r.length() < a.length()) {
+                                    a = a.substring(1);
+                                    r = null;
+                                }
+                                if (Utils.stringsAreEqual(vmd.getReferenceNucleotide(), r) && Utils.stringsAreEqual(vmd.getVariantNucleotide(), a)) {
                                     variantMap.put(j+1,vmd);
                                 }
                             }
                         }
                         else {
-                            if (Utils.stringsAreEqual(vmd.getReferenceNucleotide(), ref) && Utils.stringsAreEqual(vmd.getVariantNucleotide(), alt)) {
+                            String a = alt;
+                            String r = ref;
+                            if (r.length()>a.length()){
+                               r = r.substring(1);
+                               a = null;
+                            } else if (r.length() < a.length()) {
+                                a = a.substring(1);
+                                r = null;
+                            }
+                            if (Utils.stringsAreEqual(vmd.getReferenceNucleotide(), r) && Utils.stringsAreEqual(vmd.getVariantNucleotide(), a)) {
                                 var = vmd;
                             }
                         }

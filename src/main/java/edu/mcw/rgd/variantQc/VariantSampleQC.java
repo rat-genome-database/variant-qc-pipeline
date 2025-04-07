@@ -39,9 +39,10 @@ public class VariantSampleQC {
             String lineData;
             String[] cols = {};
             HashMap<Integer, Sample> sampleMap = new HashMap<>();
-            int varNotFound = 0;
+            int totalNewSamples = 0;
             List<VariantSampleDetail> tobeUpdated = new ArrayList<>();
             List<VariantSampleDetail> tobeInserted = new ArrayList<>();
+            int totalUpdated = 0;
             while ( (lineData = br.readLine()) != null )
             {
 //                Map<VariantMapData,String>
@@ -250,18 +251,24 @@ public class VariantSampleQC {
                 if (tobeUpdated.size()>=50000){
                     // dao call for updating sample details
                     dao.updateSampleDetails(tobeUpdated);
+                    totalUpdated += tobeUpdated.size();
                     tobeUpdated.clear();
                 }
                 if (tobeInserted.size()>50000){
                     // insert samples
                     dao.insertSampleDetails(tobeInserted);
+                    totalNewSamples += tobeInserted.size();
                     tobeInserted.clear();
                 }
             } // end buffer reader
             if (tobeUpdated.size()>0) { // update remaining
                 dao.updateSampleDetails(tobeUpdated);
+                totalUpdated += tobeUpdated.size();
+                logger.info("\tTotal samples being updated: "+totalUpdated);
             }
             if (tobeInserted.size()>0){ // insert remaining
+                totalNewSamples += tobeInserted.size();
+                logger.info("\tTotal samples being created: "+totalNewSamples);
                 dao.insertSampleDetails(tobeInserted);
             }
         }

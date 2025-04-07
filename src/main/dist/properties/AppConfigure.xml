@@ -3,6 +3,6 @@
     <bean id="variantSampleQC" class="edu.mcw.rgd.variantQc.VariantSampleQC">
         <property name="version" value="Check Variant Samples-- build 3/10/2025"/>
         <property name="mapKey" value="70"/>
-        <property name="qcFile" value="data/oldVariantData/rn5/42genomes_homozygous_SNVs_GATK.vcf.gz"/>
+        <property name="qcFile" value="data/oldVariantData/rn5/42genomes_heterozygous_SNVs_GATK.vcf.gz"/>
     </bean>
 </beans>

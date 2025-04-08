@@ -4,5 +4,13 @@
         <property name="version" value="Check Variant Samples-- build 3/10/2025"/>
         <property name="mapKey" value="70"/>
         <property name="qcFile" value="data/oldVariantData/rn5/42genomes_heterozygous_SNVs_GATK.vcf.gz"/>
+        <property name="diffSampleNameMap">
+            <map>
+                <entry key="F334/N" value="738"/>
+                <entry key="SHRSP/Gla" value="756"/>
+                <entry key="WKY/Gla" value="758"/>
+                <entry key="SUO_F344" value="757"/>
+            </map>
+        </property>
     </bean>
 </beans>

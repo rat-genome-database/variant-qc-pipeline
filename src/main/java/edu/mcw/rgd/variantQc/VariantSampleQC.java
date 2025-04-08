@@ -17,9 +17,10 @@ import java.util.zip.GZIPInputStream;
 
 public class VariantSampleQC {
 
-    String version;
-    int mapKey;
-    String qcFile;
+    private String version;
+    private int mapKey;
+    private String qcFile;
+    private Map<String, Integer> diffSampleNameMap;
 
     protected Logger logger = LogManager.getLogger("status");
     protected Logger notFound = LogManager.getLogger("notfoundStatus");
@@ -27,6 +28,7 @@ public class VariantSampleQC {
     private DAO dao = new DAO();
     private Zygosity zygosity = new Zygosity();
     private SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
     void main() throws Exception{
         logger.info(getVersion());
@@ -56,9 +58,11 @@ public class VariantSampleQC {
                         if (s==null){
                             s = dao.getSampleByStrainNameUsingLike(cols[i], mapKey);
                             if (s==null) {
-                                logger.info("\tStrain not found: " + cols[i]);
+                                s = dao.getSampleBySampleId(diffSampleNameMap.get(cols[i]));
                             }
                         }
+                        if (s==null)
+                            logger.info("\tStrain not found: " + cols[i]);
                         sampleMap.put(i,s);
                     }
                 }
@@ -371,5 +375,13 @@ public class VariantSampleQC {
 
     public String getQcFile() {
         return qcFile;
+    }
+
+    public void setDiffSampleNameMap(Map<String,Integer> diffSampleNameMap) {
+        this.diffSampleNameMap = diffSampleNameMap;
+    }
+
+    public Map<String,Integer> getDiffSampleNameMap() {
+        return diffSampleNameMap;
     }
 }

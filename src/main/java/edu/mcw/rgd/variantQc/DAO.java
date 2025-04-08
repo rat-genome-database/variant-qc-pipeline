@@ -124,6 +124,15 @@ public class DAO {
         return getSampleByStrainRgdIdAndMapKey(s.getRgdId(),mapKey);
     }
 
+    public Sample getSampleBySampleId(int sampleId) throws Exception {
+        String sql = "SELECT * FROM sample WHERE sample_id=?";
+        SampleQuery q = new SampleQuery(getVariantDataSource(), sql);
+        q.declareParameter(new SqlParameter(Types.INTEGER));
+        q.compile();
+        List<Sample> samples = q.execute(sampleId);
+        return samples.isEmpty() ? null : samples.get(0);
+    }
+
     public int insertSampleDetails(Collection<VariantSampleDetail> details) throws Exception {
         return vdao.insertVariantSample(details);
     }

@@ -3,7 +3,7 @@
     <bean id="variantSampleQC" class="edu.mcw.rgd.variantQc.VariantSampleQC">
         <property name="version" value="Check Variant Samples-- build 3/10/2025"/>
         <property name="mapKey" value="60"/>
-        <property name="qcFile" value="data\oldVariantData\rn3.4\28genome_SNP_part1.vcf.gz"/>
+        <property name="qcFile" value="data/oldVariantData/rn3.4/28genome_SNP_part1.vcf.gz"/>
         <property name="diffSampleNameMap">
             <map>
                 <entry key="F334/N" value="738"/>

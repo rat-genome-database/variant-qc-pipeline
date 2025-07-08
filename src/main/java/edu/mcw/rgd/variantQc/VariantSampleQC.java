@@ -58,7 +58,9 @@ public class VariantSampleQC {
                         if (s==null){
                             s = dao.getSampleByStrainNameUsingLike(cols[i], mapKey);
                             if (s==null) {
-                                s = dao.getSampleBySampleId(diffSampleNameMap.get(cols[i]));
+                                Integer sampleFromMap = diffSampleNameMap.get(cols[i]);
+                                if (sampleFromMap!=null)
+                                    s = dao.getSampleBySampleId(sampleFromMap);
                             }
                         }
                         if (s==null)

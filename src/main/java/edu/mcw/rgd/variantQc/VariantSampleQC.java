@@ -183,6 +183,8 @@ public class VariantSampleQC {
                         if (detailsSplit[0].equals("./."))
                             continue;
                         int totalDepth = Integer.parseInt(detailsSplit[2]); // 15 from example
+                        if (totalDepth==0)
+                            continue;
                         String[] alleleDepthSplit = detailsSplit[1].split(",");
                         if (!variantMap.isEmpty()) {
                             for (Integer varKey : varKeys){

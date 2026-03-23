@@ -1,9 +1,10 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
     <bean id="variantSampleQC" class="edu.mcw.rgd.variantQc.VariantSampleQC">
-        <property name="version" value="Check Variant Samples-- build 3/10/2025"/>
-        <property name="mapKey" value="60"/>
+        <property name="version" value="Check Variant Samples-- build 3/23/2026"/>
+        <property name="mapKey" value="70"/>
         <property name="qcFile" value="data/oldVariantData/rn3.4/28genome_SNP_part1.vcf.gz"/>
+        <property name="qcFolder" value="data/oldVariantData/rn5/"/>
         <property name="diffSampleNameMap">
             <map>
                 <entry key="F334/N" value="738"/>

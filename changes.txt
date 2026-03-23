@@ -1,3 +1,6 @@
+March 2026
+looping through all files in folder rather than one by one
+
 April 8, 2025
 added map for the strains that were not found and were renamed
 

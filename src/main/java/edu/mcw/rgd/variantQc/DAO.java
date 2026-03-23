@@ -1,32 +1,27 @@
 package edu.mcw.rgd.variantQc;
 
 import edu.mcw.rgd.dao.DataSourceFactory;
-import edu.mcw.rgd.dao.impl.*;
+import edu.mcw.rgd.dao.impl.OntologyXDAO;
+import edu.mcw.rgd.dao.impl.SampleDAO;
+import edu.mcw.rgd.dao.impl.StrainDAO;
 import edu.mcw.rgd.dao.impl.variants.VariantDAO;
 import edu.mcw.rgd.dao.spring.SampleQuery;
 import edu.mcw.rgd.dao.spring.variants.VariantMapQuery;
 import edu.mcw.rgd.dao.spring.variants.VariantSampleQuery;
-import edu.mcw.rgd.datamodel.*;
-import edu.mcw.rgd.datamodel.ontologyx.Term;
+import edu.mcw.rgd.datamodel.Sample;
+import edu.mcw.rgd.datamodel.Strain;
 import edu.mcw.rgd.datamodel.variants.VariantMapData;
 import edu.mcw.rgd.datamodel.variants.VariantSampleDetail;
-import edu.mcw.rgd.process.Utils;
-import oracle.jdbc.proxy.annotation.Pre;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.BatchSqlUpdate;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.File;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * Created by llamers on 1/28/2020.
@@ -141,4 +136,16 @@ public class DAO {
         return vdao.updateVariantSample(details);
     }
 
+    public void listFilesInFolder(File folder, ArrayList<File> vcfFiles) throws Exception {
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
+            if (file.isDirectory()) {
+                listFilesInFolder(file,vcfFiles);
+            } else {
+                if (file.getName().endsWith(".vcf.gz")) {
+//                    System.out.println(file.getName());
+                    vcfFiles.add(file);
+                }
+            }
+        }
+    }
 }

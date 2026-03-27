@@ -190,7 +190,7 @@ public class VariantSampleQC {
                                  totalDepth = Integer.parseInt(detailsSplit[2]); // 15 from example
                             }
                             catch (Exception e){
-                                logger.debug(var.getId());
+                                logger.debug(var.getId()+"|"+detailsSplit[2]);
                                 logger.debug(e);
                                 continue;
                             }

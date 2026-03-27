@@ -185,7 +185,15 @@ public class VariantSampleQC {
                             String[] detailsSplit = lineSplit[i].split(":");
                             if (detailsSplit[0].equals("./."))
                                 continue;
-                            int totalDepth = Integer.parseInt(detailsSplit[2]); // 15 from example
+                            int totalDepth;
+                            try {
+                                 totalDepth = Integer.parseInt(detailsSplit[2]); // 15 from example
+                            }
+                            catch (Exception e){
+                                logger.debug(var.getId());
+                                logger.debug(e);
+                                continue;
+                            }
                             if (totalDepth == 0)
                                 continue;
                             String[] alleleDepthSplit = detailsSplit[1].split(",");

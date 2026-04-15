@@ -18,7 +18,10 @@ public class Manager {
                         VariantSampleQC sqc = (VariantSampleQC) bf.getBean("variantSampleQC");
                         sqc.main();
                         break;
-
+                    case "-removeDupes":
+                        RemoveDuplicates rd = (RemoveDuplicates) bf.getBean("removeDupes");
+                        rd.run();
+                        break;
                 }
             }
         }

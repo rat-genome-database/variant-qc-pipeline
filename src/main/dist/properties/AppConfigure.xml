@@ -16,4 +16,8 @@
             </map>
         </property>
     </bean>
+    <bean id="removeDupes" class="edu.mcw.rgd.variantQc.RemoveDuplicates">
+        <property name="version" value="Check Variant Samples-- build 3/23/2026"/>
+        <property name="mapKey" value="372"/>
+    </bean>
 </beans>

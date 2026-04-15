@@ -21,6 +21,22 @@
             <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
         </File>
 
+        <RollingFile name="dupeDetail" append="true" fileName="logs/dupeDetail.log" filePattern="logs/dupeDetail.log.%d{yyyy-MM}">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %p [%c] - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/><!-- 1 month roll over -->
+            </Policies>
+        </RollingFile>
+        <RollingFile name="dupeStatus" append="true" fileName="logs/dupeStatus.log" filePattern="logs/dupeStatus.log.%d{yyyy-MM}">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %p [%c] - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+        <File name="dupeSummary" append="false" fileName="logs/dupeSummary.log">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+
         <RollingFile name="notfoundDetail" append="true" fileName="logs/notfoundDetail.log" filePattern="logs/notfoundDetail.log.%d{yyyy-MM}">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %p [%c] - %m%n"/>
             <Policies>
@@ -74,6 +90,12 @@
             <AppenderRef ref="noSampleDetail"/>
             <AppenderRef ref="noSampleStatus" level="info"/>
             <AppenderRef ref="noSampleSummary" level="info"/>
+        </Logger>
+        <Logger name="dupeStatus" level="debug" additivity="false">
+            <AppenderRef ref="dupeDetail"/>
+            <AppenderRef ref="dupeStatus" level="info"/>
+            <AppenderRef ref="dupeSummary" level="info"/>
+            <AppenderRef ref="Console" level="info"/>
         </Logger>
     </Loggers>
 </Configuration>

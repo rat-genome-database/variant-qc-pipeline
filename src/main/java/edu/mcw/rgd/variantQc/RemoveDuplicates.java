@@ -54,6 +54,7 @@ public class RemoveDuplicates {
             dao.updateVariant(updateRs);
         }
 
+        logger.info("Variants being withdrawn and sample details being deleted: "+vars.size());
         dao.deleteSampleDetailsBatch(vars);
         dao.withdrawVariants(origVars.keySet());
 

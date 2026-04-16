@@ -142,7 +142,7 @@ public class DAO {
 
     public List<VariantMapData> getDuplicateVariants(int mapKey, Map<Long,VariantMapData> originals) throws Exception{
         String sql = "select v1.*, vm1.*, v2.rgd_id as rgd_id2, v2.rs_id as rs_id2 from variant v1, variant v2, variant_map_data vm1, variant_map_data vm2, rgd_ids r where " +
-                "        v1.VAR_NUC=v2.VAR_NUC and v1.REF_NUC=v2.REF_NUC and v1.rgd_id=vm1.rgd_id and v2.rgd_id=vm2.rgd_id and r.rgd_id=v1.rgd_id and r.object_status='ACTIVE' and" +
+                "        NVL(v1.VAR_NUC,'-')=NVL(v2.VAR_NUC,'-') and NVL(v1.REF_NUC,'-')=NVL(v2.REF_NUC,'-') and v1.rgd_id=vm1.rgd_id and v2.rgd_id=vm2.rgd_id and r.rgd_id=v1.rgd_id and r.object_status='ACTIVE' and" +
                 "        vm1.start_pos=vm2.start_pos and vm1.end_pos=vm2.end_pos and vm1.map_key=vm2.map_key and vm1.chromosome=vm2.chromosome and vm1.rgd_id>vm2.rgd_id and vm1.map_key=?";
 //        VariantQuery q = new VariantQuery(getVariantDataSource(), sql);
 //        q.declareParameter(new SqlParameter(Types.INTEGER));
